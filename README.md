@@ -7,7 +7,7 @@ This tool identifies incorrectly-formatted outputs and finds differences between
 `python3 compare.py <FILE_1> <FILE_2> [TOLERANCE]`
 - `FILE_1`: the path to the first file to compare
 - `FILE_2`: the path to the second file to compare
-- `TOLERANCE`: optional non-negative tolerance for comparing counts between outputs. Ignores differences where `|v2 - v1| <= TOLERANCE`. Default value is 0.
+- `TOLERANCE`: optional non-negative tolerance for comparing counts between outputs. Ignores differences in values `v1` and `v2` where `|v2 - v1| <= TOLERANCE`. Default value is 0.
 
 ## Examples
 ### Comparison of Equal Files
