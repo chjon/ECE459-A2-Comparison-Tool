@@ -330,7 +330,18 @@ if __name__ == '__main__':
 
     # Read inputs
     filenames = [sys.argv[1], sys.argv[2]]
-    tolerance = 0 if len(sys.argv) == 3 else int(sys.argv[3])
+    try:
+        tolerance = 0 if len(sys.argv) == 3 else int(sys.argv[3])
+        if tolerance < 0: raise ValueError()
+    except ValueError:
+        print("TOLERANCE must be a non-negative integer value")
+        exit(1)
+
+    # Require input files to exist
+    for filename in filenames:
+        if not os.path.isfile(filename):
+            print(f"Could not find file {filename}")
+            exit(1)
 
     try:
         # Parse files
