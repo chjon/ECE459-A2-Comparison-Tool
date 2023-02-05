@@ -1,4 +1,4 @@
-double dictionary list len 21, triple 25, all tokens 14
+double dictionary list len 21, triple 27, all tokens 14
 printing dict: double
 1: ["split:^hdfs://hostname/2kSOSP.log:0+7292", "rdd_42_20^locally", "block^rdd_42_24", "split:^hdfs://hostname/2kSOSP.log:7292+7292", "rdd_42_24^locally", "split:^hdfs://hostname/2kSOSP.log:29168+7292", "block^rdd_42_22", "split:^hdfs://hostname/2kSOSP.log:21876+7292", "block^rdd_42_20", "rdd_42_22^locally", "block^rdd_42_23", "split:^hdfs://hostname/2kSOSP.log:14584+7292", "rdd_42_23^locally"]
 2: ["hdfs://hostname/2kSOSP.log:21876+7292^Input", "hdfs://hostname/2kSOSP.log:7292+7292^Input", "hdfs://hostname/2kSOSP.log:29168+7292^Found", "hdfs://hostname/2kSOSP.log:14584+7292^Input", "hdfs://hostname/2kSOSP.log:0+7292^Input"]
