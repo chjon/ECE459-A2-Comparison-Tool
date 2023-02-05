@@ -1,0 +1,20 @@
+double dictionary list len 20, triple 26, all tokens 19
+printing dict: double
+1: ["split:^hdfs://hostname/2kSOSP.log:0+7292", "rdd_42_20^locally", "block^rdd_42_24", "split:^hdfs://hostname/2kSOSP.log:7292+7292", "rdd_42_24^locally", "split:^hdfs://hostname/2kSOSP.log:29168+7292", "block^rdd_42_22", "split:^hdfs://hostname/2kSOSP.log:21876+7292", "block^rdd_42_20", "rdd_42_22^locally", "block^rdd_42_23", "split:^hdfs://hostname/2kSOSP.log:14584+7292", "rdd_42_23^locally"]
+2: ["hdfs://hostname/2kSOSP.log:21876+7292^Input", "hdfs://hostname/2kSOSP.log:7292+7292^Input", "hdfs://hostname/2kSOSP.log:29168+7292^Found", "hdfs://hostname/2kSOSP.log:14584+7292^Input", "hdfs://hostname/2kSOSP.log:0+7292^Input"]
+9: ["Found^block"]
+5: ["Input^split:"]
+6: ["locally^Found"]
+---
+printing dict: triple
+1: ["Found^block^rdd_42_22", "block^rdd_42_20^locally", "Input^split:^hdfs://hostname/2kSOSP.log:14584+7292", "Found^block^rdd_42_20", "Input^split:^hdfs://hostname/2kSOSP.log:21876+7292", "Found^block^rdd_42_24", "Input^split:^hdfs://hostname/2kSOSP.log:0+7292", "block^rdd_42_23^locally", "Input^split:^hdfs://hostname/2kSOSP.log:7292+7292", "Input^split:^hdfs://hostname/2kSOSP.log:29168+7292", "Found^block^rdd_42_23", "block^rdd_42_22^locally", "block^rdd_42_24^locally"]
+2: ["rdd_42_23^locally^Found", "split:^hdfs://hostname/2kSOSP.log:7292+7292^Input", "split:^hdfs://hostname/2kSOSP.log:29168+7292^Found", "split:^hdfs://hostname/2kSOSP.log:14584+7292^Input", "hdfs://hostname/2kSOSP.log:0+7292^Input^split:", "hdfs://hostname/2kSOSP.log:14584+7292^Input^split:", "hdfs://hostname/2kSOSP.log:29168+7292^Found^block", "rdd_42_20^locally^Found", "split:^hdfs://hostname/2kSOSP.log:21876+7292^Input", "hdfs://hostname/2kSOSP.log:7292+7292^Input^split:", "split:^hdfs://hostname/2kSOSP.log:0+7292^Input", "hdfs://hostname/2kSOSP.log:21876+7292^Input^split:"]
+5: ["locally^Found^block"]
+---
+["rdd_42_21", "hdfs://hostname/2kSOSP.log:29168+7292", "Found", "block", "rdd_42_20", "locally", "Found", "block"]
+2-gram locally^Found, count 6
+2-gram Found^block, count 4
+2-gram split:^hdfs://hostname/2kSOSP.log:29168+7292, count 1
+2-gram hdfs://hostname/2kSOSP.log:29168+7292^Found, count 2
+2-gram block^rdd_42_20, count 1
+dynamic tokens: ["hdfs://hostname/2kSOSP.log:29168+7292"]
