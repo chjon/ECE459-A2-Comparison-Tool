@@ -17,7 +17,7 @@ Files match within specified tolerance
 ```
 
 ### Comparison of Unequal Files 
-`python3 compare.py demo/sample1.txt demo/sample1.txt 2`
+`python3 compare.py demo/sample1.txt demo/sample2.txt 2`
 ```
 Detected inconsistency in file 'demo/sample1.txt':
         Mismatch between declared double dictionary length (20) and actual dictionary length (21)
