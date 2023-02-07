@@ -128,6 +128,9 @@ class A2_Parser:
             count = int(entry.group(1))
             values = VALUE_REGEX.findall(entry.group(2))
             for value in values:
+                while not isinstance(value, str):
+                    value = value[0]
+
                 if value in output_dict and output_dict[value] != count:
                     raise ConflictingValueError(value, count, output_dict[value], index)
                 output_dict[value] = count
@@ -142,35 +145,40 @@ class A2_Parser:
 
     # Read double dictionary section
     def consume_double_dict(data, strings, index):
+        TOKEN_REGEX = r'(\\.|[^\^"\\])+'
+        DOUBLE_REGEX = r'"(' + TOKEN_REGEX + r'\^' + TOKEN_REGEX + r')"'
         index = A2_Parser.consume_dict(
             data.double_dict,
             strings,
             index,
             r'printing dict: double',
-            r'(\d+): \[("[^\^"]+\^[^\^"]+"(, "[^\^"]+\^[^\^"]+")*)\]',
-            r'"([^\^"]+\^[^\^"]+)"'
+            r'(\d+): \[(' + DOUBLE_REGEX + r'(, ' + DOUBLE_REGEX + r')*)\]',
+            DOUBLE_REGEX
         )
 
         return index + 1
 
     # Read triple dictionary section
     def consume_triple_dict(data, strings, index):
+        TOKEN_REGEX = r'(\\.|[^\^"\\])+'
+        TRIPLE_REGEX = r'"(' + TOKEN_REGEX + r'\^' + TOKEN_REGEX + r'\^' + TOKEN_REGEX + r')"'
         index = A2_Parser.consume_dict(
             data.triple_dict,
             strings,
             index,
             r'printing dict: triple',
-            r'(\d+): \[("[^\^"]+\^[^\^"]+\^[^\^"]+"(, "[^\^"]+\^[^\^"]+\^[^\^"]+")*)\]',
-            r'"([^\^"]+\^[^\^"]+\^[^\^"]+)"'
+            r'(\d+): \[(' + TRIPLE_REGEX + r'(, ' + TRIPLE_REGEX + r')*)\]',
+            TRIPLE_REGEX
         )
 
         return index + 1
 
     # Read sample string tokens
     def consume_sample_tokens(data, strings, index):
-        SAMPLE_TOKENS_REGEX_STR = r'\[("[^"]+"(, "[^"]+")*)?\]'
+        TOKEN_REGEX = r'(\\.|[^\^"\\])+'
+        SAMPLE_TOKENS_REGEX_STR = r'\[("' + TOKEN_REGEX + r'"(, "' + TOKEN_REGEX + r'")*)?\]'
         SAMPLE_TOKENS_REGEX = re.compile(SAMPLE_TOKENS_REGEX_STR)
-        VALUE_REGEX_STR = r'"([^"]+)"'
+        VALUE_REGEX_STR = r'"(' + TOKEN_REGEX + r')"'
         VALUE_REGEX = re.compile(VALUE_REGEX_STR)
 
         # Check for empty line
@@ -185,13 +193,18 @@ class A2_Parser:
         # Read tokens
         values = VALUE_REGEX.findall(strings[index])
         for value in values:
+            while not isinstance(value, str):
+                value = value[0]
+
             data.sample_tokens.add(value) 
 
         return index + 1
 
     # Read 2-grams
     def consume_two_grams(data, strings, index):
-        TWO_GRAM_REGEX_STR = r'2-gram ([^\^"]+\^[^\^"]+), count (\d+)'
+        TOKEN_REGEX = r'(\\.|[^\^"\\])+'
+        DOUBLE_REGEX = r'(' + TOKEN_REGEX + r'\^' + TOKEN_REGEX + r')'
+        TWO_GRAM_REGEX_STR = r'2-gram ' + DOUBLE_REGEX + r', count (\d+)'
         TWO_GRAM_REGEX = re.compile(TWO_GRAM_REGEX_STR)
 
         while index < len(strings):
@@ -199,7 +212,7 @@ class A2_Parser:
             if two_gram == None: break
 
             two_gram_str = two_gram.group(1)
-            count = int(two_gram.group(2))
+            count = int(two_gram.groups()[-1])
 
             if two_gram_str in data.two_grams and data.two_grams[two_gram_str] != count:
                 raise ConflictingValueError(
@@ -215,9 +228,10 @@ class A2_Parser:
 
     # Read dynamic tokens
     def consume_dynamic_tokens(data, strings, index):
-        DYNAMIC_TOKENS_REGEX_STR = r'dynamic tokens: \[("[^"]+"(, "[^"]+")*)?\]'
+        TOKEN_REGEX = r'(\\.|[^\^"\\])+'
+        DYNAMIC_TOKENS_REGEX_STR = r'dynamic tokens: \[("' + TOKEN_REGEX + r'"(, "' + TOKEN_REGEX + r'")*)?\]'
         DYNAMIC_TOKENS_REGEX = re.compile(DYNAMIC_TOKENS_REGEX_STR)
-        VALUE_REGEX_STR = r'"([^"]+)"'
+        VALUE_REGEX_STR = r'"(' + TOKEN_REGEX + r')"'
         VALUE_REGEX = re.compile(VALUE_REGEX_STR)
 
         # Check for empty line
@@ -232,6 +246,9 @@ class A2_Parser:
         # Read values
         values = VALUE_REGEX.findall(''.join('' if s == None else s for s in dynamic_tokens.groups()))
         for value in values:
+            while not isinstance(value, str):
+                value = value[0]
+
             data.dynamic_tokens.add(value)
         
         return index + 1
