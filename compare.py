@@ -147,8 +147,8 @@ class A2_Parser:
             strings,
             index,
             r'printing dict: double',
-            r'(\d+): \[("[^\^"]+\^[^\^"]+"(, "[^\^"]+\^[^\^"]+")*)\]',
-            r'"([^\^"]+\^[^\^"]+)"'
+            r'(\d+): \[("(\\[^\\]|[^\^"])+\^(\\[^\\]|[^\^"])+"(, "(\\[^\\]|[^\^"])+\^(\\[^\\]|[^\^"])+")*)\]',
+            r'"((\\[^\\]|[^\^"])+\^(\\[^\\]|[^\^"])+)"'
         )
 
         return index + 1
@@ -160,17 +160,17 @@ class A2_Parser:
             strings,
             index,
             r'printing dict: triple',
-            r'(\d+): \[("[^\^"]+\^[^\^"]+\^[^\^"]+"(, "[^\^"]+\^[^\^"]+\^[^\^"]+")*)\]',
-            r'"([^\^"]+\^[^\^"]+\^[^\^"]+)"'
+            r'(\d+): \[("(\\[^\\]|[^\^"])+\^(\\[^\\]|[^\^"])+\^(\\[^\\]|[^\^"])+"(, "(\\[^\\]|[^\^"])+\^(\\[^\\]|[^\^"])+\^(\\[^\\]|[^\^"])+")*)\]',
+            r'"((\\[^\\]|[^\^"])+\^(\\[^\\]|[^\^"])+\^(\\[^\\]|[^\^"])+)"'
         )
 
         return index + 1
 
     # Read sample string tokens
     def consume_sample_tokens(data, strings, index):
-        SAMPLE_TOKENS_REGEX_STR = r'\[("[^"]+"(, "[^"]+")*)?\]'
+        SAMPLE_TOKENS_REGEX_STR = r'\[("(\\[^\\]|[^\^"])+"(, "(\\[^\\]|[^\^"])+")*)?\]'
         SAMPLE_TOKENS_REGEX = re.compile(SAMPLE_TOKENS_REGEX_STR)
-        VALUE_REGEX_STR = r'"([^"]+)"'
+        VALUE_REGEX_STR = r'"((\\[^\\]|[^\^"])+)"'
         VALUE_REGEX = re.compile(VALUE_REGEX_STR)
 
         # Check for empty line
@@ -191,7 +191,7 @@ class A2_Parser:
 
     # Read 2-grams
     def consume_two_grams(data, strings, index):
-        TWO_GRAM_REGEX_STR = r'2-gram ([^\^"]+\^[^\^"]+), count (\d+)'
+        TWO_GRAM_REGEX_STR = r'2-gram ((\\[^\\]|[^\^"])+\^(\\[^\\]|[^\^"])+), count (\d+)'
         TWO_GRAM_REGEX = re.compile(TWO_GRAM_REGEX_STR)
 
         while index < len(strings):
@@ -215,7 +215,7 @@ class A2_Parser:
 
     # Read dynamic tokens
     def consume_dynamic_tokens(data, strings, index):
-        DYNAMIC_TOKENS_REGEX_STR = r'dynamic tokens: \[("[^"]+"(, "[^"]+")*)?\]'
+        DYNAMIC_TOKENS_REGEX_STR = r'dynamic tokens: \[("(\\[^\\]|[^\^"])+"(, "(\\[^\\]|[^\^"])+")*)?\]'
         DYNAMIC_TOKENS_REGEX = re.compile(DYNAMIC_TOKENS_REGEX_STR)
         VALUE_REGEX_STR = r'"([^"]+)"'
         VALUE_REGEX = re.compile(VALUE_REGEX_STR)
