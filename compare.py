@@ -145,7 +145,7 @@ class A2_Parser:
 
     # Read double dictionary section
     def consume_double_dict(data, strings, index):
-        TOKEN_REGEX = r'(\\.|[^\^"\\])+'
+        TOKEN_REGEX = r'(\\.|[^"\\])+'
         DOUBLE_REGEX = r'"(' + TOKEN_REGEX + r'\^' + TOKEN_REGEX + r')"'
         index = A2_Parser.consume_dict(
             data.double_dict,
@@ -160,7 +160,7 @@ class A2_Parser:
 
     # Read triple dictionary section
     def consume_triple_dict(data, strings, index):
-        TOKEN_REGEX = r'(\\.|[^\^"\\])+'
+        TOKEN_REGEX = r'(\\.|[^"\\])+'
         TRIPLE_REGEX = r'"(' + TOKEN_REGEX + r'\^' + TOKEN_REGEX + r'\^' + TOKEN_REGEX + r')"'
         index = A2_Parser.consume_dict(
             data.triple_dict,
@@ -175,7 +175,7 @@ class A2_Parser:
 
     # Read sample string tokens
     def consume_sample_tokens(data, strings, index):
-        TOKEN_REGEX = r'(\\.|[^\^"\\])+'
+        TOKEN_REGEX = r'(\\.|[^"\\])+'
         SAMPLE_TOKENS_REGEX_STR = r'\[("' + TOKEN_REGEX + r'"(, "' + TOKEN_REGEX + r'")*)?\]'
         SAMPLE_TOKENS_REGEX = re.compile(SAMPLE_TOKENS_REGEX_STR)
         VALUE_REGEX_STR = r'"(' + TOKEN_REGEX + r')"'
@@ -202,7 +202,7 @@ class A2_Parser:
 
     # Read 2-grams
     def consume_two_grams(data, strings, index):
-        TOKEN_REGEX = r'(\\.|[^\^"\\])+'
+        TOKEN_REGEX = r'(\\.|[^"\\])+'
         DOUBLE_REGEX = r'(' + TOKEN_REGEX + r'\^' + TOKEN_REGEX + r')'
         TWO_GRAM_REGEX_STR = r'2-gram ' + DOUBLE_REGEX + r', count (\d+)'
         TWO_GRAM_REGEX = re.compile(TWO_GRAM_REGEX_STR)
@@ -228,7 +228,7 @@ class A2_Parser:
 
     # Read dynamic tokens
     def consume_dynamic_tokens(data, strings, index):
-        TOKEN_REGEX = r'(\\.|[^\^"\\])+'
+        TOKEN_REGEX = r'(\\.|[^"\\])+'
         DYNAMIC_TOKENS_REGEX_STR = r'dynamic tokens: \[("' + TOKEN_REGEX + r'"(, "' + TOKEN_REGEX + r'")*)?\]'
         DYNAMIC_TOKENS_REGEX = re.compile(DYNAMIC_TOKENS_REGEX_STR)
         VALUE_REGEX_STR = r'"(' + TOKEN_REGEX + r')"'
